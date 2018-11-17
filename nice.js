@@ -1,5 +1,5 @@
 const getListOfDuplicates = require('./get-list-of-duplicates');
-process.stdout.write('\033c');
+// process.stdout.write('\033c');
 const n = process.argv && process.argv[2] && +process.argv[2].split('=')[1] || 1234;
 let t = process.hrtime();
 
