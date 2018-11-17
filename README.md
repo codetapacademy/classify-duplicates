@@ -5,6 +5,14 @@ To run it from the CLI do:
 node nice.js n=12345
 ```
 
+Run script with Object keys algorithm
+```
+node nice.js n=100000
+Execution time is 0.0278 seconds
+*************************************
+Number of elements that repeat: 26457
+```
+
 Run script with filter ***indexOf*** and ***lastIndexOf***
 ```
 node nice.js n=100000
