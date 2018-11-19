@@ -5,6 +5,8 @@ const print = process.argv && process.argv[3] && process.argv[3].split('=')[1] |
 let t = process.hrtime();
 
 const elementsThatRepeat = getListOfDuplicates.getListOfDuplicatesUsingObject(n);
+// const elementsThatRepeat = getListOfDuplicates.getListOfDuplicatesUsingFilter(n);
+// const elementsThatRepeat = getListOfDuplicates.getListOfDuplicatesUsingIndex(n);
 
 t = process.hrtime(t);
 console.log(`Execution time is ${t[0] + (~~(t[1] / 100000)/10000)} seconds`)

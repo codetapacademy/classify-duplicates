@@ -18,7 +18,7 @@ const getListOfDuplicatesUsingIndex = (n = 1000000) => {
     // indexOf and lastIndexOf algorithm
     const io = list.indexOf(v1),
           lio = list.lastIndexOf(v1);
-    return io > 0 && io != lio;
+    return io >= 0 && io != lio;
   });
 }
 
@@ -29,7 +29,7 @@ const getListOfDuplicatesUsingObject = (n = 10000) => {
       i = 0,
       o = {};
   for(i; i < length; i++) {
-    const value = ~~(Math.random() * length);
+    const value = ~~(Math.random() * n) + 1;
     if (o.hasOwnProperty(value)) {
       o[value]++;
     } else {
@@ -37,7 +37,31 @@ const getListOfDuplicatesUsingObject = (n = 10000) => {
     }
   }
 
-  return Object.keys(o).filter(key => o[key] > 1);
+  const uniqueValues = Object.keys(o);
+
+  // Check for duplicates
+  if (n < 1) {
+    return 'We need at least two numbers to be generated to ensure we have one duplicate pair';
+  }
+
+  // In practice, the real world, I've never got less than 3 - 4 repeatable values
+  // when n was 25 or more, so let's only check for small values
+  if (n < 25) {
+    const onlyOneTimeRepeatableValues = uniqueValues.filter(key => o[key] === 1);
+    // in case no duplicates are present
+    // upon further investigation this code can not happen as even if the
+    // generator outputs unique values, it runs out of posibilities before
+    // the last element is generated therefore one that repeats will be generated
+    if (onlyOneTimeRepeatableValues.length === uniqueValues.length) {
+      // increase the first value repeat count by 1
+      o[uniqueValues[0]]++;
+      // remove a random value but the first one
+      delete o[uniqueValues[~~(Math.random() * uniqueValues.length - 1) + 1]];
+    }
+  }
+  
+  console.log(o);
+  return uniqueValues.filter(key => o[key] > 1);
 }
 
 module.exports = {
